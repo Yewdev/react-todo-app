@@ -8,7 +8,7 @@ const getData = () => JSON.parse(localStorage.getItem('todos') || '');
 const Todos: React.FC = () => {
   const localTodos = localStorage.getItem('todos') ? getData() : [];
   const [todos, setTodos] = useState<ITodo[]>(localTodos);
-  const limitTodos: number = 10;
+  const countActive: number = todos.filter((i) => i.completed === false).length;
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
@@ -18,8 +18,15 @@ const Todos: React.FC = () => {
       <CreateTodo setTodos={setTodos} todosLength={todos.length} />
 
       <TodoList todos={todos} setTodos={setTodos} />
-
-      <span className="text-xs tracking-widest">{`${todos.length}/${limitTodos}`}</span>
+      <div className="flex justify-between items-center">
+        <span className="text-xs ">{countActive} items left</span>
+        <div className="flex justify-between items-center text-sm gap-2">
+          <span className="">All</span>
+          <span className="">Active</span>
+          <span className="">Completed</span>
+        </div>
+        <span className="text-xs">Clear Completed</span>
+      </div>
     </div>
   );
 };
