@@ -8,11 +8,14 @@ const getData = () => JSON.parse(localStorage.getItem('todos') || '');
 const Todos: React.FC = () => {
   const localTodos = localStorage.getItem('todos') ? getData() : [];
   const [todos, setTodos] = useState<ITodo[]>(localTodos);
+  const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
   const countActive: number = todos.filter((i) => i.completed === false).length;
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
-
+  function clearCompleted() {
+    setTodos(todos.filter((e) => !e.completed));
+  }
   return (
     <div className="w-[30rem] bg-white/95 p-10 rounded-lg flex flex-col gap-8">
       <CreateTodo setTodos={setTodos} todosLength={todos.length} />
@@ -21,11 +24,19 @@ const Todos: React.FC = () => {
       <div className="flex justify-between items-center">
         <span className="text-xs ">{countActive} items left</span>
         <div className="flex justify-between items-center text-sm gap-2">
-          <span className="">All</span>
-          <span className="">Active</span>
-          <span className="">Completed</span>
+          <button className={filter === 'all' ? 'text-blue-500' : ''}>
+            All
+          </button>
+          <button className={filter === 'active' ? 'text-blue-500' : ''}>
+            Active
+          </button>
+          <button className={filter === 'completed' ? 'text-blue-500' : ''}>
+            Completed
+          </button>
         </div>
-        <span className="text-xs">Clear Completed</span>
+        <button onClick={clearCompleted} className="text-xs">
+          Clear Completed
+        </button>
       </div>
     </div>
   );
