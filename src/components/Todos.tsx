@@ -3,9 +3,11 @@ import { ITodo } from '../types';
 import CreateTodo from './CreateTodo';
 import Todo from './Todo';
 
-const localTodos = () => JSON.parse(localStorage.getItem('todos') || '');
-
+const getData = () => JSON.parse(localStorage.getItem('todos') || '');
+const setData = (key: string, value: any[]) =>
+  localStorage.setItem(key, JSON.stringify(value));
 const Todos: React.FC = () => {
+  const localTodos = localStorage.getItem('todos') ? getData() : [];
   const [todos, setTodos] = useState<ITodo[]>(localTodos);
   const limitTodos: number = 10;
   useEffect(() => {
