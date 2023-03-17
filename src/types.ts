@@ -9,7 +9,6 @@ export interface ICreateTodoProps {
 }
 
 export interface ITodoProps {
-  todo: ITodo;
-  currentTodos: ITodo[];
+  todos: ITodo[];
   setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
 }
