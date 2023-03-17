@@ -1,7 +1,14 @@
 import { useRef } from 'react';
-import { ITodoProps } from '../types';
+import { ITodoListProps } from '../types';
 
-const TodoList = ({ todos, setTodos }: ITodoProps) => {
+const TodoList = ({ todos, setTodos, filter }: ITodoListProps) => {
+  const filteredTodos =
+    filter === 'active'
+      ? todos.filter((e) => !e.completed)
+      : filter === 'completed'
+      ? todos.filter((e) => e.completed)
+      : todos;
+
   const handleToggleComplete = (id: string) => {
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
@@ -38,7 +45,7 @@ const TodoList = ({ todos, setTodos }: ITodoProps) => {
   }
   return (
     <ul className="flex flex-col gap-2">
-      {todos.map((todo, index) => (
+      {filteredTodos.map((todo, index) => (
         <li
           key={todo.id}
           draggable

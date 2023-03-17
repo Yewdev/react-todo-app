@@ -8,7 +8,8 @@ export interface ICreateTodoProps {
   setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
 }
 
-export interface ITodoProps {
+export interface ITodoListProps {
   todos: ITodo[];
   setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
+  filter: string;
 }

@@ -20,17 +20,26 @@ const Todos: React.FC = () => {
     <div className="w-[30rem] bg-white/95 p-10 rounded-lg flex flex-col gap-8">
       <CreateTodo setTodos={setTodos} todosLength={todos.length} />
 
-      <TodoList todos={todos} setTodos={setTodos} />
+      <TodoList todos={todos} setTodos={setTodos} filter={filter} />
       <div className="flex justify-between items-center">
         <span className="text-xs ">{countActive} items left</span>
         <div className="flex justify-between items-center text-sm gap-2">
-          <button className={filter === 'all' ? 'text-blue-500' : ''}>
+          <button
+            onClick={() => setFilter('all')}
+            className={filter === 'all' ? 'text-blue-500' : ''}
+          >
             All
           </button>
-          <button className={filter === 'active' ? 'text-blue-500' : ''}>
+          <button
+            onClick={() => setFilter('active')}
+            className={filter === 'active' ? 'text-blue-500' : ''}
+          >
             Active
           </button>
-          <button className={filter === 'completed' ? 'text-blue-500' : ''}>
+          <button
+            onClick={() => setFilter('completed')}
+            className={filter === 'completed' ? 'text-blue-500' : ''}
+          >
             Completed
           </button>
         </div>
