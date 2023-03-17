@@ -59,7 +59,7 @@ const TodoList = ({ todos, setTodos, filter }: ITodoListProps) => {
             onClick={() => handleToggleComplete(todo.id)}
             className={`${
               todo.completed ? 'line-through text-black/60' : ''
-            } cursor-pointer overflow-hidden w-full py-2 `}
+            } cursor-pointer overflow-hidden w-full py-2 text-sm sm:text-base `}
           >
             {todo.text}
           </span>
